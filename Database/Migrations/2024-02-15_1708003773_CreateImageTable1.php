@@ -11,7 +11,7 @@ class CreateImageTable1 implements SchemaMigration
         // マイグレーションロジックをここに追加してください
         return [
             "CREATE TABLE IF NOT EXISTS images (
-                    id INT PRIMARY KEY AUTO_INCREMENT,
+                id INT PRIMARY KEY AUTO_INCREMENT,
                 file_path VARCHAR(255) NOT NULL UNIQUE,
                 shared_path VARCHAR(255) NOT NULL UNIQUE,
                 delete_path VARCHAR(255) NOT NULL UNIQUE,
