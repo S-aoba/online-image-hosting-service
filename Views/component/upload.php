@@ -55,8 +55,10 @@
       }).then(function(data) {
         // data={status: "Image uploaded"}
         // console.log(data);
-        document.getElementById('result').innerHTML =
-          `
+        // エラーの場合の処理
+        if (data.status == "アップロードが完了しました。") {
+          document.getElementById('result').innerHTML =
+            `
           <div class="py-5 px-3">
             <div id="upload-status">${data.status}</div>
             <div class="mt-3 flex flex-col space-y-5 word-break">
@@ -71,6 +73,12 @@
             </div>
           </div>
         `;
+        } else {
+          document.getElementById('result').innerHTML =
+          `
+            <div id="upload-status" class="py-5 px-3">${data.status}</div>
+          `;
+        }
       })
     });
   });
