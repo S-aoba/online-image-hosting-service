@@ -38,26 +38,38 @@ class DatabaseHelper
     $stmt->execute();
   }
 
-  public static function checkDailyUploadLimitExceeded(string $id_address){
+  public static function checkDailyUploadLimitExceeded(string $id_address)
+  {
     $db = new MySQLWrapper();
     $stmt = $db->prepare(
-    " SELECT SUM(file_size) as total_file_size
+      " SELECT SUM(file_size) as total_file_size
       FROM images
       WHERE ip_address = ? AND created_at > NOW() - INTERVAL 1 DAY;
-    ");
+    "
+    );
     $stmt->bind_param('s', $id_address);
     $stmt->execute();
     $result = $stmt->get_result();
     $row = $result->fetch_assoc();
 
-    if($row['total_file_size'] == null) return false;
-    if($row['total_file_size'] > 3 * 1024 * 1024) return false;
-    if(!$row) return false;
+    if ($row['total_file_size'] == null) return false;
+    if ($row['total_file_size'] > 3 * 1024 * 1024) return false;
+    if (!$row) return false;
     return $row['total_file_size'];
   }
 
-  public static function checkUploadFileSize(string $file_size){
-    if($file_size > 3 * 1024 * 1024) return false;
+  public static function checkUploadFileSize(string $file_size)
+  {
+    if ($file_size > 3 * 1024 * 1024) return false;
     return true;
+  }
+
+  public static function saveImageFileToDB(string $file_path, string $shared_path, string $delete_path, string $ip_address, string $file_size, string $title)
+  {
+    $db = new MySQLWrapper();
+    $stmt = $db->prepare("INSERT INTO images(file_path, shared_path, delete_path , ip_address, file_size, title) VALUES (?, ?, ?, ?, ?, ?)");
+    $stmt->bind_param('ssssss', $file_path, $shared_path, $delete_path, $ip_address, $file_size, $title);
+    $result = $stmt->execute();
+    if (!$result) throw new Exception("Error executing INSERT query: " . $stmt->error);
   }
 }

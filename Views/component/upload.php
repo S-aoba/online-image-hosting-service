@@ -49,11 +49,11 @@
         method: 'POST',
         body: form
       }).then(function(response) {
-        console.log(response);
+        // console.log(response);
         return response.json();
       }).then(function(data) {
         // data={status: "Image uploaded"}
-        console.log(data);
+        // console.log(data);
         document.getElementById('upload-status').innerHTML = data.status;
       })
     });
