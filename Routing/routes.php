@@ -2,6 +2,8 @@
 
 use Helpers\DatabaseHelper;
 use Helpers\ValidationHelper;
+use Helpers\FileExtensionHelper;
+
 use Response\HTTPRenderer;
 use Response\Render\HTMLRenderer;
 
@@ -25,8 +27,12 @@ return [
     if(!ValidationHelper::checkFileExtension($file_type)) return new JSONRenderer(["status" => "アップロードされたファイルの拡張子が対応していません。"]);
     // アップロードされた画像のファイルサイズを確認する　一回のアップロードの最大サイズ3MBに設定
     if(!DatabaseHelper::checkUploadFileSize($file_size)) return new JSONRenderer(["status" => "アップロードされたファイルのサイズが3MBを超えています。"]);
-    // 画像のファイル名をハッシュ化する
+    // 画像のファイル名をハッシュ化する hash値.拡張子
+    $hashed_file_name = FileExtensionHelper::hashedFileName($file_name);
+
     // shared_urlを生成する {https://{domain}/{media-type}/{unique-string}}
+    $shared_url = FileExtensionHelper::generateSharedURL($hashed_file_name);
+    
     // delete_urlを生成する
     // Userのipアドレスを取得する
     // DBのimagesテーブルに画像を保存する
