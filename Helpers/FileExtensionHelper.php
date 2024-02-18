@@ -18,7 +18,7 @@ class FileExtensionHelper
     $domain = $_SERVER['HTTP_HOST'];
     $parts = explode(".", $hashedFileName);
     $mediaType = end($parts);
-    $url = "https://{$domain}/{$mediaType}/{$hashedFileName}";
+    $url = "https://{$domain}/shared/{$mediaType}/{$hashedFileName}";
     return $url;
   }
 
