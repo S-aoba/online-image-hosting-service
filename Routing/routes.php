@@ -52,5 +52,11 @@ return [
     } catch (Exception $e) {
       return new JSONRenderer(["status" => "画像の保存中に問題が発生しました。申し訳ありませんが、後でもう一度お試しください。"]);
     }
-  }
+  },
+  "shared" => function (): HTTPRenderer {
+    return new HTMLRenderer("component/shared");
+  },
+  "delete" => function (): HTTPRenderer {
+    return new HTMLRenderer("component/delete");
+  },
 ];

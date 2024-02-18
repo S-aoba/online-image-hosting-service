@@ -9,8 +9,9 @@ class URLHelper
   {
     $domain = $_SERVER['HTTP_HOST'];
     $parts = explode(".", $hashedFileName);
+
     $mediaType = end($parts);
-    $url = "https://{$domain}/shared/{$mediaType}/{$hashedFileName}";
+    $url = "https://{$domain}/shared/{$mediaType}/{$parts[0]}";
     return $url;
   }
 
