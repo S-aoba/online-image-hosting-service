@@ -24,7 +24,7 @@ return [
     // アップロードされた画像のファイルの種類を確認する(対応可能拡張子: jpg, jpeg, png, gif)
     if(!ValidationHelper::checkFileExtension($file_type)) return new JSONRenderer(["status" => "アップロードされたファイルの拡張子が対応していません。"]);
     // アップロードされた画像のファイルサイズを確認する　一回のアップロードの最大サイズ3MBに設定
-    
+    if(!DatabaseHelper::checkUploadFileSize($file_size)) return new JSONRenderer(["status" => "アップロードされたファイルのサイズが3MBを超えています。"]);
     // 画像のファイル名をハッシュ化する
     // shared_urlを生成する {https://{domain}/{media-type}/{unique-string}}
     // delete_urlを生成する

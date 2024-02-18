@@ -55,4 +55,9 @@ class DatabaseHelper
     if(!$row) return false;
     return $row['total_file_size'];
   }
+
+  public static function checkUploadFileSize(string $file_size){
+    if($file_size > 3 * 1024 * 1024) return false;
+    return true;
+  }
 }
