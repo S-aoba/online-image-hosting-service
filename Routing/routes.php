@@ -2,7 +2,7 @@
 
 use Helpers\DatabaseHelper;
 use Helpers\ValidationHelper;
-use Helpers\FileExtensionHelper;
+use Helpers\FileHelper;
 use Helpers\URLHelper;
 
 use Response\HTTPRenderer;
@@ -29,13 +29,16 @@ return [
     // アップロードされた画像のファイルサイズを確認する　一回のアップロードの最大サイズ3MBに設定
     if (!DatabaseHelper::checkUploadFileSize($file_size)) return new JSONRenderer(["status" => "アップロードされたファイルのサイズが3MBを超えています。"]);
     // 画像のファイル名をハッシュ化する hash値.拡張子
-    $hashed_file_name = FileExtensionHelper::hashedFileName($file_name);
+    $hashed_file_name = FileHelper::hashedFileName($file_name);
 
     // shared_urlを生成する {https://{domain}/{media-type}/{unique-string}}
     $shared_url = URLHelper::generateSharedURL($hashed_file_name);
 
     // delete_urlを生成する
     $delete_url = URLHelper::generateDeleteURL($file_type);
+
+    // uploads folderに画像を保存する
+
     // DBのimagesテーブルに画像を保存する
     return new JSONRenderer(["status" => "Image uploaded", 'shared_url' => 'https://www.google.com', "ip_address" => $ipAddress]);
   }

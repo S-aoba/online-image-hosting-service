@@ -2,7 +2,7 @@
 
 namespace Helpers;
 
-class FileExtensionHelper
+class FileHelper
 {
   public static function hashedFileName(string $fileName): string
   {
@@ -13,5 +13,5 @@ class FileExtensionHelper
     return $hashedFileName;
   }
 
- 
+
 }
