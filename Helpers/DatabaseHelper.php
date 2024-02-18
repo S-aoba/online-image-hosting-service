@@ -37,4 +37,22 @@ class DatabaseHelper
     $stmt->bind_param('s', $hashedValue);
     $stmt->execute();
   }
+
+  public static function checkDailyUploadLimitExceeded(string $id_address){
+    $db = new MySQLWrapper();
+    $stmt = $db->prepare(
+    " SELECT SUM(file_size) as total_file_size
+      FROM images
+      WHERE ip_address = ? AND created_at > NOW() - INTERVAL 1 DAY;
+    ");
+    $stmt->bind_param('s', $id_address);
+    $stmt->execute();
+    $result = $stmt->get_result();
+    $row = $result->fetch_assoc();
+
+    if($row['total_file_size'] == null) return false;
+    if($row['total_file_size'] > 3 * 1024 * 1024) return false;
+    if(!$row) return false;
+    return $row['total_file_size'];
+  }
 }
