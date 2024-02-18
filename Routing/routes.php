@@ -37,9 +37,9 @@ return [
     // delete_urlを生成する
     $delete_url = URLHelper::generateDeleteURL($file_type);
 
-    // uploads folderに画像を保存する
-
     // DBのimagesテーブルに画像を保存する
+    // uploads folderに画像を保存する
+    FileHelper::saveImageFile($hashed_file_name);
     return new JSONRenderer(["status" => "Image uploaded", 'shared_url' => 'https://www.google.com', "ip_address" => $ipAddress]);
   }
   // Imageの作成
