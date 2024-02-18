@@ -32,10 +32,9 @@ return [
 
     // shared_urlを生成する {https://{domain}/{media-type}/{unique-string}}
     $shared_url = FileExtensionHelper::generateSharedURL($hashed_file_name);
-    
+
     // delete_urlを生成する
     $delete_url = FileExtensionHelper::generateDeleteURL($file_type);
-    // Userのipアドレスを取得する
     // DBのimagesテーブルに画像を保存する
     return new JSONRenderer(["status" => "Image uploaded", 'shared_url' => 'https://www.google.com', "ip_address"=> $ipAddress]);
   }
