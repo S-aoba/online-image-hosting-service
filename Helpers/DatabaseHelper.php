@@ -53,9 +53,9 @@ class DatabaseHelper
     $row = $result->fetch_assoc();
 
     if ($row['total_file_size'] == null) return false;
-    if ($row['total_file_size'] > 3 * 1024 * 1024) return false;
+    if ($row['total_file_size'] > 5 * 1024 * 1024) return false;
     if (!$row) return false;
-    return $row['total_file_size'];
+    return true;
   }
 
   public static function checkUploadFileSize(string $file_size)
