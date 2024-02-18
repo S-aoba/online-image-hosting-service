@@ -21,4 +21,12 @@ class FileExtensionHelper
     $url = "https://{$domain}/{$mediaType}/{$hashedFileName}";
     return $url;
   }
+
+  public static function generateDeleteURL(string $fileType){
+    // ランダムなハッシュ値を生成する
+    $hashedFileName = hash('sha256', uniqid());
+    $domain = $_SERVER['HTTP_HOST'];
+    $url = "https://{$domain}/delete/{$fileType}/{$hashedFileName}";
+    return $url;
+  }
 }
