@@ -22,8 +22,9 @@ return [
     error_log($ipAddress);
     if(!DatabaseHelper::checkDailyUploadLimitExceeded($ipAddress)) return new JSONRenderer(["status" => "1日あたりのアップロード容量を超えました。1日最大容量は、5MBです。"]);
     // アップロードされた画像のファイルの種類を確認する(対応可能拡張子: jpg, jpeg, png, gif)
-    
+    if(!ValidationHelper::checkFileExtension($file_type)) return new JSONRenderer(["status" => "アップロードされたファイルの拡張子が対応していません。"]);
     // アップロードされた画像のファイルサイズを確認する　一回のアップロードの最大サイズ3MBに設定
+    
     // 画像のファイル名をハッシュ化する
     // shared_urlを生成する {https://{domain}/{media-type}/{unique-string}}
     // delete_urlを生成する

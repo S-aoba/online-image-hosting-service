@@ -67,4 +67,14 @@ class ValidationHelper
     // 現在の時間が有効期限を超えているかどうかを確認
     return $current_time->format('Y-m-d H:i:s') > $created_at->format('Y-m-d H:i:s');
   }
+
+  public static function checkFileExtension(string $file_type)
+  {
+    $file_type = strtolower($file_type);
+    $allowed_extensions = ['image/jpg', 'image/jpeg', 'image/png', 'image/gif'];
+    if (!in_array($file_type, $allowed_extensions)) {
+      return false;
+    }
+    return true;
+  }
 }
