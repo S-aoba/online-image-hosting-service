@@ -48,7 +48,7 @@ return [
       );
       // uploads folderに画像を保存する
       FileHelper::saveImageFile($hashed_file_name);
-      return new JSONRenderer(["status" => "Image uploaded", 'shared_url' => $shared_url, "delete_url" => $delete_url]);
+      return new JSONRenderer(["status" => "アップロードが完了しました。", 'shared_url' => $shared_url, "delete_url" => $delete_url]);
     } catch (Exception $e) {
       return new JSONRenderer(["status" => "画像の保存中に問題が発生しました。申し訳ありませんが、後でもう一度お試しください。"]);
     }

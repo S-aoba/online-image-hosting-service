@@ -20,7 +20,8 @@
           <div>
             <button id="upload-button" type="submit" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">投稿する</button>
           </div>
-          <div id="upload-status"></div>
+          <div id="result" class="w-full h-fit bg-white">
+          </div>
         </div>
       </div>
     </div>
@@ -54,7 +55,22 @@
       }).then(function(data) {
         // data={status: "Image uploaded"}
         // console.log(data);
-        document.getElementById('upload-status').innerHTML = data.status;
+        document.getElementById('result').innerHTML =
+          `
+          <div class="py-5 px-3">
+            <div id="upload-status">${data.status}</div>
+            <div class="mt-3 flex flex-col space-y-5 word-break">
+              <div>
+                <p>共有用URLはこちら↓</p>
+                <a href="#" class="break-all underline underline-offset-4 hover:underline hover:text-blue-500 hover:cursor-pointer">${data.shared_url}</a>
+              </div>
+              <div>
+                <p>削除用URLはこちら↓</p>
+                <a href="#" class="break-all underline underline-offset-4 hover:underline hover:text-blue-500 hover:cursor-pointer">${data.delete_url}</a>
+              </div>
+            </div>
+          </div>
+        `;
       })
     });
   });
