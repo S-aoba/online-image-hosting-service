@@ -68,14 +68,14 @@
               </div>
               <div>
                 <p>削除用URLはこちら↓</p>
-                <a href="#" class="break-all underline underline-offset-4 hover:underline hover:text-blue-500 hover:cursor-pointer">${data.delete_url}</a>
+                <a href="${data.delete_url}" class="break-all underline underline-offset-4 hover:underline hover:text-blue-500 hover:cursor-pointer">${data.delete_url}</a>
               </div>
             </div>
           </div>
         `;
         } else {
           document.getElementById('result').innerHTML =
-          `
+            `
             <div id="upload-status" class="py-5 px-3">${data.status}</div>
           `;
         }
