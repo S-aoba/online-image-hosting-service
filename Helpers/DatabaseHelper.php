@@ -52,7 +52,6 @@ class DatabaseHelper
     $result = $stmt->get_result();
     $row = $result->fetch_assoc();
 
-    if ($row['total_file_size'] == null) return false;
     if ($row['total_file_size'] > 5 * 1024 * 1024) return false;
     if (!$row) return false;
     return true;
