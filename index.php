@@ -10,6 +10,15 @@ $routes = include('Routing/routes.php');
 $path = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
 $path = ltrim($path, '/');
 
+// shared/png/7c7326b6a14f4016205f64b0b61b834535ef91cf819dd54b4a59f9f8eed8e83a
+// /で分ける
+$shared_path = explode('/', $path);
+// sharedが存在するか
+if(in_array('shared', $shared_path)) {
+  $path = "shared";
+}
+
+
 // ルートにパスが存在するかチェックする
 if (isset($routes[$path])) {
   // コールバックを呼び出してrendererを作成します。

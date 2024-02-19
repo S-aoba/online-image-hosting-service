@@ -64,7 +64,7 @@
             <div class="mt-3 flex flex-col space-y-5 word-break">
               <div>
                 <p>共有用URLはこちら↓</p>
-                <a href="#" class="break-all underline underline-offset-4 hover:underline hover:text-blue-500 hover:cursor-pointer">${data.shared_url}</a>
+                <a href="${data.shared_url}" class="break-all underline underline-offset-4 hover:underline hover:text-blue-500 hover:cursor-pointer">${data.shared_url}</a>
               </div>
               <div>
                 <p>削除用URLはこちら↓</p>

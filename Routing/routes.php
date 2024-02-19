@@ -53,8 +53,16 @@ return [
       return new JSONRenderer(["status" => "画像の保存中に問題が発生しました。申し訳ありませんが、後でもう一度お試しください。"]);
     }
   },
-  "shared" => function (): HTTPRenderer {
-    return new HTMLRenderer("component/shared");
+  'shared' => function (): HTTPRenderer {
+    $url = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
+    $shared_path = explode('/', $url);
+    if (in_array('shared', $shared_path)) {
+      $extension = $shared_path[2];
+      $hash = $shared_path[3];
+      $parent_dir = substr($hash, 0, 2);
+
+      return new HTMLRenderer("component/shared", ["hashed_file_name" => $hash, "file_type" => $extension, "parent_dir" => $parent_dir]);
+    }
   },
   "delete" => function (): HTTPRenderer {
     return new HTMLRenderer("component/delete");
