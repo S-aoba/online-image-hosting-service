@@ -65,6 +65,30 @@ return [
     }
   },
   "delete" => function (): HTTPRenderer {
-    return new HTMLRenderer("component/delete");
+    // Delete Pathを取得
+    $url = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
+
+    $domain = $_SERVER['HTTP_HOST'];
+    $url = "https://" . $domain . $url;
+
+    $data = DatabaseHelper::getImage($url, "delete");
+
+    if (!$data) {
+      return new HTMLRenderer("component/not-found");
+    }
+
+    $parent_dir = substr($data['file_path'], 0, 2);
+
+    $image_path = "uploads/img/" . $parent_dir . "/" . $data['file_path'];
+
+    $delete_path_list = explode('/', $url);
+
+    return new HTMLRenderer('component/delete', ["image_path" => $image_path, "file_type" => $delete_path_list[5], "delete_path" => $url]);
   },
+  'delete/post' => function (): HTTPRenderer {
+    $delete_path = $_POST['delete_path'];
+
+    DatabaseHelper::deleteImage($delete_path);
+    return new JSONRenderer(["status" => "削除しました。"]);
+  }
 ];

@@ -72,4 +72,39 @@ class DatabaseHelper
     $result = $stmt->execute();
     if (!$result) throw new Exception("Error executing INSERT query: " . $stmt->error);
   }
+
+  public static function getImage(string $path, string $type)
+  {
+    $db = new MySQLWrapper();
+
+    if ($type === "shared") {
+      // DBから画像を取得する
+      $stmt = $db->prepare("SELECT * FROM images WHERE shared_path = ?");
+      $stmt->bind_param('s', $path);
+      $stmt->execute();
+      $result = $stmt->get_result();
+      $row = $result->fetch_assoc();
+
+      if (!$row) return false;
+      return $row;
+    } else if ($type === "delete") {
+      // DBから画像を取得する
+      $stmt = $db->prepare("SELECT * FROM images WHERE delete_path = ?");
+      $stmt->bind_param('s', $path);
+      $stmt->execute();
+      $result = $stmt->get_result();
+      $row = $result->fetch_assoc();
+      if (!$row) return false;
+      return $row;
+    }
+  }
+
+  public static function deleteImage(string $path)
+  {
+    $db = new MySQLWrapper();
+    $stmt = $db->prepare("DELETE FROM images WHERE delete_path = ?");
+    $stmt->bind_param('s', $path);
+    $stmt->execute();
+    
+  }
 }

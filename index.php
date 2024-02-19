@@ -12,10 +12,16 @@ $path = ltrim($path, '/');
 
 // shared/png/7c7326b6a14f4016205f64b0b61b834535ef91cf819dd54b4a59f9f8eed8e83a
 // /で分ける
-$shared_path = explode('/', $path);
+$path_list = explode('/', $path);
 // sharedが存在するか
-if(in_array('shared', $shared_path)) {
+if (in_array('shared', $path_list)) {
   $path = "shared";
+} else if (in_array('delete', $path_list)) {
+  if (in_array('post', $path_list)) {
+    $path = "delete/post";
+  } else {
+    $path = "delete";
+  }
 }
 
 
