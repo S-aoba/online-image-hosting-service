@@ -64,11 +64,10 @@ return [
     if (!$data) {
       return new HTMLRenderer("component/not-found");
     }
-
     $shared_path = explode('/', $url);
     if (in_array('shared', $shared_path)) {
-      $extension = $shared_path[2];
-      $hash = $shared_path[3];
+      $extension = $shared_path[4];
+      $hash = $shared_path[5];
       $parent_dir = substr($hash, 0, 2);
 
       return new HTMLRenderer("component/shared", ["hashed_file_name" => $hash, "file_type" => $extension, "parent_dir" => $parent_dir]);
