@@ -18,7 +18,7 @@
           <input id="title" name="title" type="text" placeholder="タイトル" class="p-2" required>
           <input id="image" name="image" type="file" accept=".png, .jpg, .jpeg, .gif" required>
           <div>
-            <button id="upload-button" type="submit" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">投稿する</button>
+            <button id="upload-button" type="button" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">投稿する</button>
           </div>
           <div id="result" class="w-full h-fit bg-white">
           </div>
@@ -38,7 +38,7 @@
       }
       reader.readAsDataURL(file);
     }
-    // console.log(file);
+    console.log(file);
     const title = document.getElementById('title');
     const form = new FormData();
 
