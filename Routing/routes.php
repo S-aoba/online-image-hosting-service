@@ -55,6 +55,16 @@ return [
   },
   'shared' => function (): HTTPRenderer {
     $url = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
+
+    $domain = $_SERVER['HTTP_HOST'];
+    $url = "https://" . $domain . $url;
+
+    $data = DatabaseHelper::getImage($url, "shared");
+
+    if (!$data) {
+      return new HTMLRenderer("component/not-found");
+    }
+
     $shared_path = explode('/', $url);
     if (in_array('shared', $shared_path)) {
       $extension = $shared_path[2];
