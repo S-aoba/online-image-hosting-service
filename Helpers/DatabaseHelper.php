@@ -99,12 +99,15 @@ class DatabaseHelper
     }
   }
 
-  public static function deleteImage(string $path)
+  public static function deleteImage(string $path = "")
   {
-    $db = new MySQLWrapper();
-    $stmt = $db->prepare("DELETE FROM images WHERE delete_path = ?");
-    $stmt->bind_param('s', $path);
-    $stmt->execute();
-    
+    try {
+      $db = new MySQLWrapper();
+      $stmt = $db->prepare("DELETE FROM images WHERE delete_path = ?");
+      $stmt->bind_param('s', $path);
+      $stmt->execute();
+    } catch (Exception $e) {
+      throw new Exception("Error executing DELETE query: " . $stmt->error);
+    }
   }
 }
