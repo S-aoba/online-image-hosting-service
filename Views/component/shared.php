@@ -9,13 +9,16 @@ $image_data = base64_encode(file_get_contents($image_path));
 $data_uri = "data:image/$file_type;base64,$image_data";
 ?>
 
-<div class="w-full h-full my-3 p-3 flex justify-center">
-  <div class="w-5/12 h-fit bg-white">
-    <img src="<?= $data_uri ?>" />
+<div class="flex flex-col w-full h-full my-3 p-3 items-center">
+  <div class="flex items-center space-x-5 py-10">
+    <p class="text-2xl font-bold">閲覧回数: 1</p>
+    <div>
+      <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+        <a href="http://localhost:8000/upload">投稿ページへ</a>
+      </button>
+    </div>
   </div>
-  <div>
-    <button>
-      <a href="http://localhost:8000/upload">投稿ページへ</a>
-    </button>
+  <div class="w-fit h-fit max-h-[600px] flex justify-center bg-white">
+    <img src="<?= $data_uri ?>" class="object-cover max-h-full" />
   </div>
 </div>
