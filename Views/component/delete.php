@@ -34,10 +34,10 @@ $data_uri = "data:image/$file_type;base64,$image_data";
       method: 'POST',
       body: form
     }).then((response) => {
-      console.log(response);
+      // console.log(response);
       return response.json();
     }).then((data) => {
-      console.log(data.status);
+      // console.log(data.status);
       document.getElementById("delete_status").innerHTML = data.status;
       deleteBtn.disabled = true;
       deleteBtn.className += " cursor-not-allowed opacity-50";

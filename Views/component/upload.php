@@ -38,7 +38,7 @@
       }
       reader.readAsDataURL(file);
     }
-    console.log(file);
+    // console.log(file);
     const title = document.getElementById('title');
     const form = new FormData();
 
