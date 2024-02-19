@@ -39,6 +39,8 @@ $data_uri = "data:image/$file_type;base64,$image_data";
     }).then((data) => {
       console.log(data.status);
       document.getElementById("delete_status").innerHTML = data.status;
+      deleteBtn.disabled = true;
+      deleteBtn.className += " cursor-not-allowed opacity-50";
     })
   });
 </script>
