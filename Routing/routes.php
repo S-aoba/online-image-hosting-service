@@ -65,13 +65,16 @@ return [
     if (!$data) {
       return new HTMLRenderer("component/not-found");
     }
+
+    // アクセスがあるとview_countを1増やす
+    DatabaseHelper::increaseViewCount($data['shared_path']);
     $shared_path = explode('/', $url);
     if (in_array('shared', $shared_path)) {
       $extension = $shared_path[4];
       $hash = $shared_path[5];
       $parent_dir = substr($hash, 0, 2);
 
-      return new HTMLRenderer("component/shared", ["hashed_file_name" => $hash, "file_type" => $extension, "parent_dir" => $parent_dir]);
+      return new HTMLRenderer("component/shared", ["hashed_file_name" => $hash, "file_type" => $extension, "parent_dir" => $parent_dir, "view_count" => $data['view_count'], "title" => $data['title']]);
     }
   },
   "delete" => function (): HTTPRenderer {

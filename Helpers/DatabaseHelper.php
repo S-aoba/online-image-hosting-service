@@ -109,4 +109,12 @@ class DatabaseHelper
       throw new Exception("Error executing DELETE query: " . $stmt->error);
     }
   }
+
+  public static function increaseViewCount(string $path)
+  {
+    $db = new MySQLWrapper();
+    $stmt = $db->prepare("UPDATE images SET view_count = view_count + 1 WHERE shared_path = ?");
+    $stmt->bind_param('s', $path);
+    $stmt->execute();
+  }
 }

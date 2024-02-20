@@ -10,8 +10,11 @@ $data_uri = "data:image/$file_type;base64,$image_data";
 ?>
 
 <div class="flex flex-col w-full h-full my-3 p-3 items-center">
-  <div class="flex items-center space-x-5 py-10">
-    <p class="text-2xl font-bold">閲覧回数: 1</p>
+  <div class="flex flex-col items-center space-y-5 py-10">
+    <div>
+      <p class="text-2xl font-bold"><?= $title ?></p>
+      <p class="text-2xl font-bold">閲覧回数: <?= $view_count ?></p>
+    </div>
     <div>
       <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
         <a href="http://localhost:8000/upload">投稿ページへ</a>
