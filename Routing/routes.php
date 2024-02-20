@@ -23,6 +23,7 @@ return [
       $file_type = $_FILES['image']['type'];
       // Userが1日にアップロードできる画像ファイルの最大サイズを超えていないかを確認する
       // 1日の最大容量5MB
+      // ローカル環境のphp.iniのupload_max_filesizeを2MBなので、それ以上のファイルはアップロードできない。本番環境は変える必要ある。
       $ipAddress = $_SERVER['REMOTE_ADDR'];
       if (!DatabaseHelper::checkDailyUploadLimitExceeded($ipAddress)) return new JSONRenderer(["status" => "1日あたりのアップロード容量を超えました。1日最大容量は、5MBです。"]);
       // アップロードされた画像のファイルの種類を確認する(対応可能拡張子: jpg, jpeg, png, gif)
