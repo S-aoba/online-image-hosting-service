@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="ja">
+<html lang="ja" class="h-screen">
     <head>
         <!-- Required meta tags -->
         <meta charset="utf-8">
@@ -10,5 +10,5 @@
 
         <title>Online Image Hosting Service</title>
     </head>
-    <body>
-        <main>
+    <body class="h-full w-full flex flex-col justify-center items-center  pt-10">
+        <main class="flex-1 max-w-screen-2xl w-full rounded-xl">

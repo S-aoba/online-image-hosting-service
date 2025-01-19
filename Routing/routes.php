@@ -7,5 +7,7 @@ use Response\Render\HTMLRenderer;
 use Response\Render\JSONRenderer;
 
 return [
-    
+    '' => function(): HTTPRenderer {
+      return new HTMLRenderer('component/home');
+    }
 ];
