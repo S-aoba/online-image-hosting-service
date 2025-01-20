@@ -18,7 +18,7 @@ class CreateImageTable implements SchemaMigration
                 mime_type VARCHAR(50) NOT NULL,              -- MIMEタイプ（例: image/jpeg）
                 created_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,  -- 作成日時
                 views INT NOT NULL DEFAULT 0,                -- 閲覧回数
-                unique_toke VARCHAR(64) NOT NULL             -- URL
+                unique_token VARCHAR(64) NOT NULL             -- URL
             )"
         ];
     }
