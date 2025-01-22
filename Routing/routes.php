@@ -50,7 +50,8 @@ return [
 
       $uniqueTokenURL = "http://localhost:8000/{$validatedFileData['type']}/" . $uniqueToken;
       $deleteURL = 'http://localhost:8000/delete/' . $deletePath;
+      $fullImagePath = 'private/uploads/' . $imagePath;
 
-      return new JSONRenderer(['success' => $result['success'], 'message' => $result['message'], 'uniqueTokenURL' => $uniqueTokenURL, 'deleteURL' => $deleteURL]);
+      return new JSONRenderer(['success' => $result['success'], 'message' => $result['message'], 'uniqueTokenURL' => $uniqueTokenURL, 'deleteURL' => $deleteURL, 'imagePath' => $fullImagePath]);
     }
 ];
