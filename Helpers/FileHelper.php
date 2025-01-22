@@ -2,9 +2,11 @@
 
 namespace Helpers;
 
+use Exception;
+
 class FileHelper {
   public static function formatFileData(array $file): array {
-    $formatList = ['name', 'type', 'size'];
+    $formatList = ['name', 'type', 'size', 'tmp_name'];
     $formattedFile = [];
 
     foreach($file as $key => $val) {
@@ -51,5 +53,12 @@ class FileHelper {
 
   public static function generateUniqueTokenPath(string $filename): string {
     return hash('sha256', $filename);
+  }
+
+  public static function moveUploadFile(string $tempFilePath, string $imagePath): void {
+    $savePath = 'private/uploads/' . $imagePath;
+    
+    $result = move_uploaded_file($tempFilePath, $savePath);
+    if($result === false) throw new Exception('Could not move upload file.');
   }
 }
