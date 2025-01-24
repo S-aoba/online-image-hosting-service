@@ -1,4 +1,8 @@
 <div class="w-full h-full flex flex-col items-center justify-center space-y-5">
+  <!-- Header -->
+  <div class="flex py-10 items-center">
+      <p class="text-3xl font-bold font-serif text-slate-800">Online Image Hosting Service</p>
+   </div>
   <div class="max-w-screen-md w-full flex items-center justify-center h-96 shadow-md border">
     <label 
       for="file-upload" 
