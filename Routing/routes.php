@@ -11,6 +11,16 @@ return [
     '' => function(): HTTPRenderer {
       return new HTMLRenderer('component/upload');
     },
+    'delete' => function(): HTTPRenderer {
+      $deletePath = $_GET['path'];
+      // error_log(var_export($deletePath, true));
+
+      // バリデーション？
+      $result = DatabaseHelper::deleteUploadImage($deletePath);
+
+      if($result === false) return new HTMLRenderer('component/delete-failed');
+      return new HTMLRenderer('component/delete-success');
+    },
     'api/image/upload' => function(): JSONRenderer {
       $file = $_FILES['image'];
       // error_log(var_export($file, true));
@@ -46,7 +56,7 @@ return [
       FileHelper::moveUploadFile($validatedFileData['tmp_name'], $imagePath);
 
       $uniqueTokenURL = "http://localhost:8000/{$validatedFileData['type']}/" . $uniqueToken;
-      $deleteURL = 'http://localhost:8000/delete/' . $deletePath;
+      $deleteURL = 'http://localhost:8000/delete?path=' . $deletePath;
       $fullImagePath = 'private/uploads/' . $imagePath;
 
       return new JSONRenderer(['success' => $result['success'], 'message' => $result['message'], 'uniqueTokenURL' => $uniqueTokenURL, 'deleteURL' => $deleteURL, 'imagePath' => $fullImagePath]);
