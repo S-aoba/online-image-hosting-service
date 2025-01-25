@@ -29,18 +29,18 @@ class DatabaseHelper
     }
   }
 
-  // public static function getUploadImage(string $imagePath) : array {
-  //   $db = new MySQLWrapper();
+  public static function getUploadImage(string $imagePath) : array {
+    $db = new MySQLWrapper();
 
-  //   $stmt = $db->prepare("SELECT * FROM images WHERE image_path = ?");
-  //   $stmt->bind_param('s', $imagePath);
-  //   $stmt->execute();
+    $stmt = $db->prepare("SELECT * FROM images WHERE unique_token = ?");
+    $stmt->bind_param('s', $imagePath);
+    $stmt->execute();
 
-  //   $result = $stmt->get_result();
-  //   $image = $result->fetch_assoc();
+    $result = $stmt->get_result();
+    $image = $result->fetch_assoc();
 
-  //   return $image;
-  // }
+    return $image;
+  }
 
   public static function deleteUploadImage(string $deletePath): bool {
     $db = new MySQLWrapper();
