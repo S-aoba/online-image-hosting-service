@@ -61,4 +61,8 @@ class FileHelper {
     $result = move_uploaded_file($tempFilePath, $savePath);
     if($result === false) throw new Exception('Could not move upload file.');
   }
+
+  public static function removeUploadFile(string $fullUploadPath): bool {
+    return unlink($fullUploadPath);
+  }
 }

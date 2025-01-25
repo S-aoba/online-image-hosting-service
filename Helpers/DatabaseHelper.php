@@ -29,6 +29,19 @@ class DatabaseHelper
     }
   }
 
+  public static function getUploadImageByDeletePath(string $deletePath): array {
+    $db = new MySQLWrapper();
+
+    $stmt = $db->prepare("SELECT * FROM images WHERE delete_path = ?");
+    $stmt->bind_param('s', $deletePath);
+    $stmt->execute();
+
+    $result = $stmt->get_result();
+    $image = $result->fetch_assoc();
+
+    return $image;
+  }
+
   public static function getUploadImage(string $imagePath) : array {
     $db = new MySQLWrapper();
 
